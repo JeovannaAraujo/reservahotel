@@ -1,43 +1,4 @@
 <?php
-include('conexao.php');
-?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Efetuar Reserva</title>
-</head>
-
-<body>
-    <h1>Efetuar Reserva</h1>
-    <form action="" method="post">
-
-        Nome do Hóspede: <input type="text" name="nome_hospede" required><br><br>
-
-        <label for="id_quarto">Escolha o quarto:</label>
-        <select name="id_quarto" id="id_quarto" required>
-            <?php
-            $result = $mysqli->query("SELECT ID, CONCAT(tipo, ' - Andar ', andar, ' - ', status) AS descricao FROM quarto WHERE status = 'Disponível'");
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row['ID'] . '">' . $row['descricao'] . '</option>';
-            }
-            ?>
-        </select><br><br>
-
-        Data de Check-in: <input type="date" name="checkin" required><br><br>
-        Data de Checkout: <input type="date" name="checkout" required><br><br>
-
-        <input type="submit" value="Reservar">
-        <br><br>
-        <a href="index.php">Voltar</a>
-    </form>
-    <br>
-</body>
-
-</html>
-
-<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["id_quarto"])) {
         $nome_hospede = $_POST["nome_hospede"];
